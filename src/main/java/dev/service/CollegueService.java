@@ -1,9 +1,10 @@
 package dev.service;
 
 import java.util.List;
-
+import java.util.UUID;
 import org.springframework.stereotype.Service;
-
+import dev.dto.CreerCollegueRequestDto;
+import dev.entite.Collegue;
 import dev.repository.CollegueRepo;
 
 @Service
@@ -25,5 +26,27 @@ public class CollegueService {
 	public List <String> rechercherParNom (String nom) {
 		
 		return collegueRepo.findByNom(nom);
+	}
+
+
+
+
+	public Collegue creerCollegue(CreerCollegueRequestDto dto) {
+       Collegue collegue = new Collegue();
+       collegue.setNom(dto.getNom());
+       collegue.setPrenom(dto.getPrenoms());
+       collegue.setDateDeNaissance(dto.getDateDeNaissance());
+       collegue.setPhotoUrl(dto.getPhotoUrl());
+       
+       //logique métier (génération du matricule)
+       
+       collegue.setMatricule(UUID.randomUUID().toString());
+       collegue.setEmail(dto.getPrenoms()+"."+dto.getNom()+"@dev.fr");
+       
+       //=> envoyer un email aux RH par exemple
+       
+      return this.collegueRepo.save(collegue);// insert into collegue
+       
+		
 	}
 }
