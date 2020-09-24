@@ -1,6 +1,7 @@
 package dev.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
 import dev.dto.CreerCollegueRequestDto;
@@ -28,6 +29,10 @@ public class CollegueService {
 		return collegueRepo.findByNom(nom);
 	}
 
+
+	public Optional<Collegue> getByMatricule(String matricule) {
+		return collegueRepo.findByMatricule(matricule);
+	}
 
 
 
