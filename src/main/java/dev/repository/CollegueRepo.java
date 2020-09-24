@@ -3,7 +3,9 @@ package dev.repository;
 import java.util.List;
 import java.util.Optional;
 
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -21,4 +23,10 @@ public interface CollegueRepo extends JpaRepository <Collegue,Integer> {
 	@Query("select c from Collegue c where c.matricule=?1")       //echange avec la base pour recupérer les infos liés au matricule
 	Optional<Collegue> findByMatricule(String matricule);
 
+	
+	@Modifying
+	@Query("update Collegue c set c.email = ?2, c.photoUrl=?3 where c.matricule=?1")
+	void update(String matricule, String email, String urlPhoto);
+	
+	
 }
