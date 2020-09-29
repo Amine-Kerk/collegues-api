@@ -2,6 +2,7 @@ package dev.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -19,8 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
-
+import dev.CollegueGalerie;
 import dev.dto.CreerCollegueRequestDto;
 import dev.dto.CreerCollegueResponseDto;
 import dev.dto.PatchCollegueRequestDto;
@@ -41,8 +41,12 @@ public class CollegueCtrl {
 		super();
 		this.collegueService = collegueService;
 	}
-
-
+//GET/collegues/photos
+	@GetMapping("photos")
+	public List<CollegueGalerie> findAllGalerie() {
+		return collegueService.getList().stream().map(c -> new CollegueGalerie(c.getMatricule(), c.getPhotoUrl()))
+				.collect(Collectors.toList());
+	}
 
 
 	//GET/collegues
@@ -68,6 +72,7 @@ public class CollegueCtrl {
 			return ResponseEntity.notFound().build();
 		}
 	}
+	
 
 	
 	// POST /collegues

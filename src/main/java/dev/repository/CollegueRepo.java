@@ -23,6 +23,7 @@ public interface CollegueRepo extends JpaRepository <Collegue,Integer> {
 	@Query("select c from Collegue c where c.matricule=?1")       //echange avec la base pour recupérer les infos liés au matricule
 	Optional<Collegue> findByMatricule(String matricule);
 
+
 	
 	@Modifying
 	@Query("update Collegue c set c.email = ?2, c.photoUrl=?3 where c.matricule=?1")

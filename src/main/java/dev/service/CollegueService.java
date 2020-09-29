@@ -24,8 +24,10 @@ public class CollegueService {
 		super();
 		this.collegueRepo = collegueRepo;
 	}
-
-
+//recupére une liste de données depuis labase 
+	public List<Collegue> getList() {
+		return collegueRepo.findAll();
+	}
 
 //recuperer le nom depuis la bdd
 	public List <String> rechercherParNom (String nom) {
@@ -37,6 +39,8 @@ public class CollegueService {
 	public Optional<Collegue> getByMatricule(String matricule) {
 		return collegueRepo.findByMatricule(matricule);
 	}
+	
+
 	
 	/**
 	 * 
